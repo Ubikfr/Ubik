@@ -1,0 +1,32 @@
+{
+    "name": "bcb/youbik",
+    "type": "website",
+    "description": "Mon site",
+    "keywords": ["website"],
+    "homepage": "http://www.youbik.fr",
+    "license": "COMMERCIAL",
+    "authors": [
+        {
+            "name": "Benoît Collet-Billon",
+            "email": "benoit.colletbillon@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+    	"peej/tonic": "3.*@dev",
+    	"smarty/smarty": "3.*",
+    	"pimple/pimple": "1.*",
+        "mustangostang/spyc": "dev-master",
+        "michelf/php-markdown": "1.4.*@dev",
+        "phpseclib/phpseclib": "0.3.6",
+        "jamesmoss/flywheel": "dev-master"
+    },
+	"autoload": {
+    	"psr-4": {
+        	"Ubik\\": ["Ubik/"]
+    	},
+  		"psr-0": {
+  			"": "Ubik/" 
+  		}
+	}
+}
