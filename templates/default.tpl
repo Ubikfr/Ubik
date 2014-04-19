@@ -39,10 +39,9 @@
 {include "partials/footer.tpl"}
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="/assets/js/vendor/jquery-1.11.0.min.js"><\/script>')</script>
-<script type="text/javascript" src="/assets/js/main.js"></script>
 {if isset($extra_js) }{foreach $extra_js as $js}
 <script type="text/javascript" src="{$js}"></script>
 {/foreach}{/if}
-</script>
+<script type="text/javascript" src="/assets/js/main.js"></script>
 </body>
 </html>
