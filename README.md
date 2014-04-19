@@ -21,6 +21,7 @@ Tout ça pour dire qu'aux vues de l'avancement du projet et de son caractère co
 ## Configuration
  * éditer `config/default-sample.php` et le renommer en `config/default.php`
  * pour jouer avec la base de donnée, la struture de la table "Users" se trouve dans `doc/users.sql`
+ * [Une brève documentation](https://github.com/Ubikfr/Ubik/blob/master/public/content/help.md).
 
 ## Configuration d'Apache
  * le DocumentRoot du serveur doit pointer vers le dossier `public`
