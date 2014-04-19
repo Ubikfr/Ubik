@@ -1,3 +1,4 @@
+cache/*
 vendor/*
 config/default.php
 .sass-cache
