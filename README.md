@@ -1,4 +1,4 @@
 Ubik
 ====
 
-Falt file CMS with optional DB 
+Flat file CMS with optional DB.
