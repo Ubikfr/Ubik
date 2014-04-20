@@ -393,6 +393,17 @@ hr {
 }
 
 /* line 15, ../sass/styles.scss */
+#ubik {
+  display: block;
+  margin: 0 auto;
+}
+
+/* line 20, ../sass/styles.scss */
+.center p {
+  text-align: center;
+}
+
+/* line 24, ../sass/styles.scss */
 code {
   display: inline;
   color: #af3838;
@@ -401,25 +412,25 @@ code {
   padding: 0.1em 0.5em;
 }
 
-/* line 23, ../sass/styles.scss */
+/* line 32, ../sass/styles.scss */
 pre {
   margin: 0.5em 2em;
 }
-/* line 25, ../sass/styles.scss */
+/* line 34, ../sass/styles.scss */
 pre code {
   border: none;
 }
 
-/* line 30, ../sass/styles.scss */
+/* line 39, ../sass/styles.scss */
 p, li {
   line-height: 1.5em;
 }
 
-/* line 34, ../sass/styles.scss */
+/* line 43, ../sass/styles.scss */
 h1 {
   margin-top: 2em;
 }
-/* line 36, ../sass/styles.scss */
+/* line 45, ../sass/styles.scss */
 h1:first-child {
   margin-bottom: 2em;
   text-align: center;
