@@ -4,7 +4,7 @@ include_once '../config/global.php';
 require_once '../vendor/autoload.php';;
 
 // Start PHP Session
-$session = new PhpSession('BCBSession');
+$session = new PhpSession('UbikSession');
 // Create Pimple container
 $container = new Utils_Container();
 // Init Tonic App
