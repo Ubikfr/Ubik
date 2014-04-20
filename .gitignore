@@ -4,4 +4,4 @@ config/default.php
 .sass-cache
 composer.lock
 composer.phar
-playground*
+playground*php
