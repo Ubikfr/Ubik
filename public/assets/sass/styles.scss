@@ -17,10 +17,6 @@
     margin: 0 auto;
 }
 
-.center p {
-    text-align: center;
-}
-
 code {
     display: inline;
     color: #af3838;
@@ -38,6 +34,10 @@ pre {
 
 p, li {
     line-height: 1.5em;
+    .center & {
+        text-align: center;
+        line-height: 1em;
+    }
 }
 
 h1 {
