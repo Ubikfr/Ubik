@@ -1,0 +1,20 @@
+diff -Naur vendor.old/jamesmoss/flywheel/src/JamesMoss/Flywheel/Query.php vendor/jamesmoss/flywheel/src/JamesMoss/Flywheel/Query.php
+--- vendor.old/jamesmoss/flywheel/src/JamesMoss/Flywheel/Query.php	2014-04-20 10:08:26.987647000 +0200
++++ vendor/jamesmoss/flywheel/src/JamesMoss/Flywheel/Query.php	2014-04-11 23:32:02.297799000 +0200
+@@ -16,7 +16,7 @@
+     protected $where   = false;
+ 
+     protected $operators = array(
+-        '>', '>=', '<', '<=', '==', '===',
++        '>', '>=', '<', '<=', '==', '===', '=~',
+     );
+ 
+     /**
+@@ -99,6 +99,7 @@
+                     case ($operator === '>=' && $value >= $predicate): return true;
+                     case ($operator === '<'  && $value <  $predicate): return true;
+                     case ($operator === '>=' && $value >= $predicate): return true;
++                    case ($operator === '=~' && (strpos($value,$predicate)!==false)): return true;
+                 }
+ 
+                 return false;

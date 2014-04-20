@@ -2,4 +2,5 @@ cache/*
 vendor/*
 config/default.php
 .sass-cache
-
+composer.lock
+composer.phar
