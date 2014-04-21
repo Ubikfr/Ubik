@@ -53,6 +53,11 @@ class Utils_Container extends Pimple
             return $c['config']['post_par_page'];;
         };
 
+        $this['email'] = function () use ($c)
+        {
+            return $c['config']['email'];;
+        };
+
         $this['blog_repo'] = function () use ($c)
         {
             $config = new \JamesMoss\Flywheel\Config('content', array(

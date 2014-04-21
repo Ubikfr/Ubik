@@ -81,3 +81,35 @@ class FeedResource extends Resource
         return $response;
     }
 }
+
+/**
+ * Send Email
+ * @uri /mail
+ * @priority 2
+ */
+class MailResource extends Resource
+{
+    /**
+     * @method POST
+     */
+    function html()
+    {
+        $data = json_decode($this->request->data);
+        $dao = new Dao_Mail($this->container, $data);
+        $errors = $dao->checkData();
+        if (count($errors)) {
+            $response = new Response(Response::BADREQUEST);
+            $response->contentType = 'application/json';
+            $response->body = json_encode($errors);
+        }
+        else {
+            //$dao->Send();
+            $msg = array('message' => 'Votre message a été envoyé. Merci.');
+            $response = new Response(Response::OK);
+            $response->contentType = 'application/json';
+            $response->body = json_encode($msg);
+        }
+        
+        return $response;
+    }
+}

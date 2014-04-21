@@ -1,5 +1,5 @@
 <footer class="footer">
-	<hr>
+    <hr>
     <div class="quart"><a href="/">Acceuil</a></div>
     <div class="quart"><a href="/blog">Blog</a></div>
     <div class="quart"><a href="/playground">Playground</a></div>

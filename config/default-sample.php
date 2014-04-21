@@ -20,5 +20,6 @@ return array (
         'cache' => new Tonic\MetadataCacheFile(CACHE_DIR.DS.'tonic.cache')
     ),
     'loggedIn' => false,
-    'post_par_page' => 4
+    'post_par_page' => 4,
+    'email' => '{email@dusite}'
 );
