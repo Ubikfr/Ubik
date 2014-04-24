@@ -16,14 +16,15 @@ $('#sendRequest').on('click', function(e){
 });
 
 var login = function() {
-    var e = $('#email').val();
-    var p = $('#password').val();
+    //var e = $('#email').val();
+    //var p = $('#password').val();
     $.ajax({
         type: "POST",
         url: "/api/users/login",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
-        data: JSON.stringify({email: e, password: p}),
+        data: JSON.stringify({blob: encrypt()}),
+        //data: {blob: encrypt()},
         success: function (data) {
             alert('Bienvenu: ' + data.prenom );
             document.location.href = data.start ;
@@ -49,9 +50,11 @@ var logout = function() {
 };
 
 var encrypt = function(){
+    sessionStorage.setItem('MOD',$('#mod').val());
+    sessionStorage.setItem('EXPO',$('#exp').val());
     var crendentials = JSON.stringify({"email": $('#email').val(), "password": $('#password').val()});
     var rsa = new RSAKey();
-    rsa.setPublic(localStorage.PUBLICKEY, localStorage.EXPO);
+    rsa.setPublic(sessionStorage.MOD, sessionStorage.EXPO);
     var crypted = rsa.encrypt(crendentials);
     return crypted;
 };

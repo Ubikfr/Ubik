@@ -16,39 +16,47 @@ class UserLoginResource extends Resource
     function login()
     {
         $data = json_decode($this->request->data);
-        $email = $data->email;
-        $password = $data->password;
-
-        $dao = new Dao_User($this->container['db']);
-        $user = $dao->findByEmailPassword($email, $password);
-
-        if($user!=null){
-            try{
-                // create a session from the user
-                $dao->loginUser($user);
-                $params = array(
-                    'start' => '/',
-                    'prenom' => $user->getPrenom(),
-                );
-
-                // return a json response
-                $response = new Response(Response::OK);
-                $response->contentType = 'application/json';
-                $response->body = json_encode($params);
-            }
-            catch (Exception $e) {
-                $response = new Response(Response::BADREQUEST);
-                $response->body = $e->getMessage();
-                return $response;
-            }
-            return $response;
-        }
-        else{
-            // return an unauthorized exception (401)
+        $blob = $data->blob;
+        $key = new Utils_RsaCrypt();
+        $key->loadKey('001');
+        $decrypt = json_decode($key->decrypt($blob));
+        if (!$decrypt) {
             $response = new Response(Response::UNAUTHORIZED);
             $response->body = 'Accès refusé';
-            return $response;
         }
+        else {
+            $email = $decrypt->email;
+            $password = $decrypt->password;
+
+            $dao = new Dao_User($this->container['db']);
+            $user = $dao->findByEmailPassword($email, $password);
+
+            if($user!=null){
+                try{
+                    // create a session from the user
+                    $dao->loginUser($user);
+                    $params = array(
+                        'start' => '/',
+                        'prenom' => $user->getPrenom(),
+                    );
+                    // return a json response
+                    $response = new Response(Response::OK);
+                    $response->contentType = 'application/json';
+                    $response->body = json_encode($params);
+                }
+                catch (Exception $e) {
+                    $response = new Response(Response::BADREQUEST);
+                    $response->body = $e->getMessage();
+                }
+            }
+            else{
+                // return an unauthorized exception (401)
+                $response = new Response(Response::UNAUTHORIZED);
+                $response->body = 'Accès refusé';
+            }
+        }
+
+        return $response;
     }
 }
 
@@ -72,7 +80,7 @@ class UserLogoutResource extends Resource
                 'start' => '/',
                 'prenom' => $user->getPrenom(),
             );
-                
+
             $response = new Response(Response::OK);
             $response->contentType = 'application/json';
             $response->body = json_encode($params);

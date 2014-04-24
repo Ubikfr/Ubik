@@ -25,7 +25,7 @@ class Dao_SystemPage
             $fct = $this->meta['dao']['fct'];
             $dao = new $class($this->container['db']);
             $data = $dao->$fct();
-            $this->template->assign('producteurs', $data);
+            $this->template->assign($this->meta['dao']['spot'], $data);
         }
 
         if (isset($this->meta['css'])) {

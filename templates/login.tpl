@@ -33,6 +33,8 @@
 <!--[if lt IE 9]>
     <span class="browsehappy">Vous utilisez un navigateur totalement <strong>dépassé</strong>. Merci de le <a href="http://browsehappy.com/">mettre à jour</a> afin de visualiser ce site correctement. <a class="close" href="#"></a></span>
 <![endif]-->
+<input id="mod" type="hidden" value="{$publickey.mod}">
+<input id="exp" type="hidden" value="{$publickey.exp}">
 <section class="login">
     <div class="inner">
 {if isset($loggedinUser)}

@@ -2,8 +2,8 @@
 
 class Utils_RsaCrypt
 {
-    private var $privatekey;
-    public var $publickey = array();
+    private $privatekey;
+    public $publickey = array();
 
     public function __construct()
     {
@@ -25,7 +25,7 @@ class Utils_RsaCrypt
         }
     }
 
-    private function loadKey($num)
+    public function loadKey($num)
     {
         $file = file_get_contents(KEYS_DIR.'key_'.$num);
         $this->privatekey = openssl_pkey_get_private($file);
