@@ -15,17 +15,6 @@ class UserLoginResource extends Resource
      */
     function login()
     {
-        // parse request
-        //parse_str($this->request->data, $request);
-        //$crypted = $request['blob'];
-
-        // Decrypt credentials
-        //$pkey = openssl_pkey_get_private($_SESSION['private']);
-        //if (openssl_private_decrypt(pack('H*', $crypted), $r, $pkey)) {
-        //    $result = json_decode($r);
-        //}
-
-        
         $data = json_decode($this->request->data);
         $email = $data->email;
         $password = $data->password;
@@ -60,11 +49,6 @@ class UserLoginResource extends Resource
             $response->body = 'Accès refusé';
             return $response;
         }
-    }
-
-    private function to_hex($data)
-    {
-        return strtoupper(bin2hex($data));
     }
 }
 

@@ -8,3 +8,4 @@ define('PUB_DIR', ROOT_DIR.DS.'public');
 define('CONTENT', PUB_DIR.DS.'content');
 define('TEMPL_DIR', ROOT_DIR.DS.'templates');
 define('CACHE_DIR', ROOT_DIR.DS.'cache');
+define('KEYS_DIR', ROOT_DIR.DS.'keys'.DS);

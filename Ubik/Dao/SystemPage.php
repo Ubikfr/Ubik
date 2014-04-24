@@ -37,7 +37,7 @@ class Dao_SystemPage
         }
 
         if ($this->container['loggedIn']) {
-            $this->template->assign('loggedin', 'true');
+            $this->template->assign('loggedinUser', $this->container['user']);
         }
     }
 

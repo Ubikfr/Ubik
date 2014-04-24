@@ -56,6 +56,8 @@ class LoginPageResource extends Resource
      */
     function html()
     {
+        $session = new Session('login', '/login', 'public', $this->container);
+        $this->container = $session->Check();
         $dao = new Dao_SystemPage('login', $this->container);
         $response = new Response(Response::OK);
         $response->body = $dao->Render();

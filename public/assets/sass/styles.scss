@@ -57,10 +57,27 @@ h1 {
 }
 
 // Form login
+section.login {
+    background: url("/assets/img/ubik.png") center center no-repeat;
+    display: table;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    .inner {
+        display: table-cell;
+        position: relative;
+        vertical-align: middle;
+        text-align: center;
+    }
+}
 .loginform {
     display: block;
     width: 33%;
     margin: 2em auto;
+    span {
+        margin: 2em;
+        display: block;
+    }
 }
 input,
 textarea {
