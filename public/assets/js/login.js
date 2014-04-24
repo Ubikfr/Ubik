@@ -1,5 +1,3 @@
-var apiSecretKey = 'ABC123';
-
 $('#login').on('click', function(e){
     e.preventDefault();
     login();
@@ -16,15 +14,12 @@ $('#sendRequest').on('click', function(e){
 });
 
 var login = function() {
-    //var e = $('#email').val();
-    //var p = $('#password').val();
     $.ajax({
         type: "POST",
         url: "/api/users/login",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         data: JSON.stringify({blob: encrypt()}),
-        //data: {blob: encrypt()},
         success: function (data) {
             alert('Bienvenu: ' + data.prenom );
             document.location.href = data.start ;
