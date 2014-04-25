@@ -13,8 +13,7 @@ class Dao_RsaKey
     {
         $this->key = new Utils_RsaCrypt();
         $this->key->loadKey('001');
-        $this->key->getDetails();
-
-        return $this->key->publickey;
+        
+        return $this->key->getDetails();
     }
 }

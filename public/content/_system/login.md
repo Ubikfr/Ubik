@@ -7,10 +7,8 @@ js:
   /assets/js/vendor/jsbn-1.4.min.js
   /assets/js/vendor/hmac-sha256.js
   /assets/js/login.js
-dao:
-  spot: publickey
-  class: Dao_RsaKey
-  fct: publicKey
+widget:
+  publickey
 ---
 <form class="loginform">
     <input id="email" placeholder="E-MAIL:" type="text">

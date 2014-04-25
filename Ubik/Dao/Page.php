@@ -1,9 +1,8 @@
 <?php
 class Dao_Page
 {
-    private $container;             // Pimple container
-    private $config = array();      // Config array from Page Config File
-    private $tpl;                   // Template FILE
+    private $container;             // Conteneur Pimple
+    private $tpl;                   // Template
     
     function __construct($url, $meta, $content, Utils_Container $c)
     {
@@ -15,27 +14,25 @@ class Dao_Page
 
     public function initTemplate(){
         $this->template = $this->container['smarty'];
-        $this->template->force_compile = true;
-        
+        // Décommenter si utilisation AJAX
+        //$this->template->force_compile = true;
+
+        // Commun ajax et html
+        $this->template->assign('titre', $this->meta['titre']);
+        $this->template->assign('content', $this->content);
+
         if ($this->container['mode'] == 'ajax') {
             $this->tpl = $this->meta['template'].'_ajax.tpl';
         }
         else { // 'html'
             $this->tpl = $this->meta['template'].'.tpl';
+            // Chargement du javascript
             if (isset($this->meta['js'])) {
                 $this->template->assign('extra_js', $this->meta['js']);
             }
         }
-           
-        // Commun ajax et html
-        $this->template->assign('titre', $this->meta['titre']);
-        $this->template->assign('content', $this->content);
 
-        if (isset($this->meta['fields'])) {
-            foreach($this->meta['fields'] as $tag => $text) {
-                $this->template->assign($tag, $text);
-            }
-        }
+        // Data access objects
         if (isset($this->meta['dao'])) {
             $class = $this->meta['dao']['class'];
             $fct = $this->meta['dao']['fct'];
@@ -43,14 +40,23 @@ class Dao_Page
             $data = $dao->$fct();
             $this->template->assign($this->meta['dao']['spot'], $data);
         }
+
+        // Widgets
+        if (isset($this->meta['widget'])) {
+            foreach ($this->meta['widget'] as $widget) {
+                $class = 'Widget_'.$widget;
+                $my_widget = new $class();
+                $data = $my_widget->Render();
+                $this->template->assign($widget, $data);
+            }
+        }
+
+        // Extra CSS
         if (isset($this->meta['css'])) {
             $this->template->assign('extra_css', $this->meta['css']);
         }
-        
-        if (isset($this->meta['script'])) {
-            $script = require $this->dir.$this->meta['script'];
-            $this->template->assign('script', $script);
-        }
+
+        // Utilisateur connecté
         if ($this->container['loggedIn']) {
             $this->template->assign('loggedinUser', $this->container['user']);
         }   

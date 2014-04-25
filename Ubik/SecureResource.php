@@ -10,7 +10,6 @@ class SecureResource extends Resource
             $request->data = json_decode($request->data);
             $blob = $request->data->blob;
             $key = new Utils_RsaCrypt();
-            $key->loadKey('001');
             $request->data = json_decode($key->decrypt($blob));
         });
     }
@@ -33,7 +32,6 @@ class SecureResource extends Resource
 
             // Décryptage de X-INFO
             $key = new Utils_RsaCrypt();
-            $key->loadKey('001');
             $info = explode('$', $key->decrypt($info));
             $email = $info['0'];
             $my_referer = $info['1'];
