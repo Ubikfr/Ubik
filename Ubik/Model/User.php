@@ -112,12 +112,30 @@ class Model_User extends Model_Base
     }
 
     /**
-     * Set emailCanonical
-     * @param string $emailCanonical
+     * Set first name
+     * @param string $prenom
      */
     public function setPrenom($prenom)
     {
         $this->prenom = $prenom;
+    }
+
+    /**
+     * Get token
+     * @return string token
+     */
+    public function getToken()
+    {
+        return $this->token;
+    }
+
+    /**
+     * Set token
+     * @param string $token
+     */
+    public function setToken($token)
+    {
+        $this->token = $token;
     }
 
     /**
@@ -134,6 +152,7 @@ class Model_User extends Model_Base
             'prenom' => $this->getPrenom(),
             'role' => $this->getRole(),
             'lastLogin' => $this->getLastLogin(),
+            'token' => $this->getToken(),
         );
 
         return $data;

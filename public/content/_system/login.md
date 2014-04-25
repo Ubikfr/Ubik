@@ -5,6 +5,7 @@ access: public
 content: html
 js:
   /assets/js/vendor/jsbn-1.4.min.js
+  /assets/js/vendor/hmac-sha256.js
   /assets/js/login.js
 dao:
   spot: publickey

@@ -4,19 +4,22 @@ use Tonic\Response;
 use Tonic\ConditionException;
 
 /**
- * A protected API call to login a user
+ * Connexion d'un utilisateur 
  * @uri /api/users/login
  * @priority 2
  */
-class UserLoginResource extends Resource
+class UserLoginResource extends SecureResource
 {
     /**
      * @method POST
      * @decrypt
+     * @respjson
      */
     function login()
     {
-        // si $this->request->data == null, le décryptage a foiré
+        // Toute la partie décryptage est dans Ubik/SecureResource.php
+        // fonction appelée par l'annotation @decrypt
+        // si $this->request->data == null, le décryptage a foiré ou la requête est vide (??)
         if (!$this->request->data) {
             $response = new Response(Response::UNAUTHORIZED);
             $response->body = 'Accès refusé';
@@ -25,17 +28,20 @@ class UserLoginResource extends Resource
         else {
             $email = $this->request->data->email;
             $password = $this->request->data->password;
+            $token = $this->request->data->token;
 
             $dao = new Dao_User($this->container['db']);
             $user = $dao->findByEmailPassword($email, $password);
 
             if($user!=null){
                 try{
-                    // Créer la session pour l'utilsateur
-                    $dao->loginUser($user);
+                    // Créer la session pour l'utilsateur et enregistrer token
+                    $dao->loginUser($user,$token);
                     // Prénom pour dire bonjour et page de redirection
                     $params = array(
                         'start' => '/',
+                        'id' => $user->getId(),
+                        'nom' => $user->getNom(),
                         'prenom' => $user->getPrenom(),
                     );
                     $response = new Response(Response::OK);
@@ -56,28 +62,10 @@ class UserLoginResource extends Resource
         // Réponse
         return $response;
     }
-
-    function decrypt()
-    {
-        // Avant de traiter la requête: décodage JSON et décryptage
-        $this->before(function ($request) {
-            $request->data = json_decode($request->data);
-            $blob = $request->data->blob;
-            $key = new Utils_RsaCrypt();
-            $key->loadKey('001');
-            $request->data = json_decode($key->decrypt($blob));
-        });
-
-        // Avant d'envoyer la réponse: encodage des parmétres en JSON
-        $this->after(function ($response) {
-            $response->contentType = "application/json";
-            $response->body = json_encode($response->body);
-        });
-    }
 }
 
 /**
- * A protected API call to logout a user
+ * Déconnexion d'un utilisateur 
  * @uri /api/users/logout
  * @priority 2
  */

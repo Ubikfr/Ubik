@@ -43,7 +43,7 @@ class Dao_User
         $data = $s->fetch();
 
         if (!$data) {
-            return $data;
+            return null;
         }
 
         return new Model_User($data);
@@ -143,10 +143,10 @@ class Dao_User
      */
     public function recordLogin(Model_User $user)
     {
-        $q = "UPDATE Users SET lastLogin = CURDATE() WHERE email = :email";
+        $q = "UPDATE Users SET lastLogin = CURDATE(), token = :token WHERE email = :email";
         $s = $this->db->prepare($q);
 
-        return $s->execute(array('email' => $user->getEmail()));
+        return $s->execute(array('email' => $user->getEmail(), 'token' => $user->getToken()));
     }
 
     /**
@@ -177,10 +177,12 @@ class Dao_User
 
     /**
      * Login user
-     * @param  User $user User
+     * @param User $user            User Model
+     * @param string $token         Private token form user
      */
-    public function loginUser(Model_User $user)
+    public function loginUser(Model_User $user, $token)
     {
+        $user->setToken($token);
         $this->recordLogin($user);
         session_regenerate_id();
         $_SESSION['UserId'] = $user->getId();
