@@ -10,7 +10,9 @@ $('#logout').on('click', function(e){
 
 $('#sendRequest').on('click', function(e){
     e.preventDefault();
-    testRequest();
+    var url = '/api/test'
+    var data = {'var1': $('#var1').val(), 'var2': $('#var2').val(), 'var3': $('#var3').val(), 'var4': $('#var4').val()};
+    secureRequest(url, data);
 });
 
 var login = function() {
@@ -61,8 +63,6 @@ var crypt_credentials = function(){
 };
 
 var crypt_plaintext = function(plaintext){
-    sessionStorage.setItem('MOD',$('#mod').val());
-    sessionStorage.setItem('EXPO',$('#exp').val());
     var rsa = new RSAKey();
     rsa.setPublic(sessionStorage.MOD, sessionStorage.EXPO);
     var crypted = rsa.encrypt(plaintext);
@@ -91,10 +91,11 @@ var secureRequest = function(url, data) {
         },
         data: datastring,
         success: function (data) {
-            alert(data);
+            alert('Succès, le seveur dit: ' + data);
         },
         error: function (errorMessage) {
-               alert(errorMessage.responseText);
+            if(errorMessage.status == 401)
+               alert('Accès refusé');
         }
     });
 };
