@@ -27,7 +27,7 @@ class SecureResource extends Resource
             $my_microtime = microtime(true);
             
             // Délai de 10 secondes max entre requête et la réception
-            if (($my_microtime - $microtime) > 10){
+            if (abs($my_microtime - $microtime) > 10){
                 throw new Tonic\UnauthorizedException;
             }
 
