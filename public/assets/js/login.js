@@ -91,7 +91,7 @@ var secureRequest = function(url, data) {
         },
         data: datastring,
         success: function (data) {
-            alert('Succès, le seveur dit: ' + data);
+            alert('Succès, le seveur dit: ' + data.text);
         },
         error: function (errorMessage) {
             if(errorMessage.status == 401)
