@@ -31,12 +31,11 @@ class Dao_Post
             case 'page':
                 $page = intval($this->container['blog']['page']);
                 $nb = intval($this->container['post_par_page']);
-                $to = $page*$nb;
-                $from = $to+$nb;
+                $from = $page*$nb;
                 $posts = $this->repo->query()
                                     ->where('status', '==', 'publish')
                                     ->orderBy('date ASC')
-                                    ->limit($from,$to)
+                                    ->limit($nb,$from)
                                     ->execute();
                 if (count($posts)) {
                     $i=0;
